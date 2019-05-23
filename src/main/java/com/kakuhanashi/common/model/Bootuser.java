@@ -11,7 +11,6 @@ import com.kakuhanashi.common.model.base.BaseBootuser;
 public class Bootuser extends BaseBootuser<Bootuser> {
 	
 	public Record get(){
-	
 		String sql = "SELECT * FROM `bootuser` WHERE id >= (SELECT floor(RAND() * (SELECT MAX(id) FROM `bootuser`)))  ORDER BY id LIMIT 1;";
 		return	Db.findFirst(sql);
 		 
