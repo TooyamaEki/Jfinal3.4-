@@ -1,5 +1,7 @@
 package com.kakuhanashi.common.model;
 
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.kakuhanashi.common.model.base.BaseBootuser;
 
 /**
@@ -8,4 +10,12 @@ import com.kakuhanashi.common.model.base.BaseBootuser;
 @SuppressWarnings("serial")
 public class Bootuser extends BaseBootuser<Bootuser> {
 	
+	public Record get(){
+	
+		String sql = "SELECT * FROM `bootuser` WHERE id >= (SELECT floor(RAND() * (SELECT MAX(id) FROM `bootuser`)))  ORDER BY id LIMIT 1;";
+		return	Db.findFirst(sql);
+		 
+		
+		
+	}
 }
