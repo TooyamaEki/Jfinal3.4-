@@ -1,5 +1,7 @@
 package com.kakuhanashi.common.model;
 
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.kakuhanashi.common.model.base.BaseCodeMsg;
 
 /**
@@ -7,5 +9,8 @@ import com.kakuhanashi.common.model.base.BaseCodeMsg;
  */
 @SuppressWarnings("serial")
 public class CodeMsg extends BaseCodeMsg<CodeMsg> {
-	
+	public Record get(int code) {
+		String sql = "SELECT * FROM code_msg  WHERE code = ?";
+		return Db.findFirst(sql, code);
+	}
 }
