@@ -1,23 +1,47 @@
 package com.kakuhanashi.service;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
 import com.kakuhanashi.common.model.User;
+import com.kakuhanashi.tools.DateUtil;
 
 public class UserService {
 	public static final UserService me = new UserService();
 	User dao = new User().dao();
-	
-	public Record add (User m){
-		Date date = new Date();      
-		Timestamp nousedate = new Timestamp(date.getTime());
+
+	/**
+	 * 添加用户 2019年5月24日17:04:16
+	 * 
+	 * @param m
+	 * @return
+	 */
+	public boolean add(User m) {
 		m.removeNullValueAttrs();
-		m.keep("account","psw","name");
-		System.err.println(nousedate);
-		return null;
-		
+		m.keep("account", "psw", "name");
+		m.set("create_time", DateUtil.getNowTime());
+		return m.save();
+
 	}
+
+	/**
+	 * 根据account拿信息
+	 * 
+	 * @param account
+	 * @return
+	 */
+	public Record get(String account) {
+		Record r = dao.get(account);
+		return r;
+	}
+
+	
+	public Record login(String account, String psw) {
+		Record r = get(account);
+		if (r != null && r.getStr("psw").equals(psw)) {
+			r.keep("name", "id", "state", "type", "account");
+			return r;
+		}
+		return null;
+	}
+
 }

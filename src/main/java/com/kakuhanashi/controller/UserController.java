@@ -1,12 +1,9 @@
 package com.kakuhanashi.controller;
 
-
-
 import com.jfinal.plugin.activerecord.Record;
 import com.kakuhanashi.common.model.User;
 import com.kakuhanashi.service.RandomUserService;
 import com.kakuhanashi.service.UserService;
-
 
 public class UserController extends com.jfinal.Controller {
 	/**
@@ -14,11 +11,31 @@ public class UserController extends com.jfinal.Controller {
 	 */
 	public void randomUser() {
 		Record r = RandomUserService.me.randomUser();
-		setCode(1,r);
-		
+		setSessionAttr("UserInfo", r);
+		setCode(1, r);
+
 	}
-	
-	public void reg(){
-            UserService.me.add(getModel(User.class,"m"));
+
+	public void reg() {
+		boolean b = UserService.me.add(getModel(User.class, "m"));
+		if (b) {
+			setCode(1);
+
+		} else {
+			renderText("注册失败");
+		}
+	}
+
+	/**
+	 * 登录 2019年5月24日17:53:08 振业
+	 */
+	public void login() {
+		Record r = UserService.me.login(getPara("account"), getPara("psw"));
+		if (r != null) {
+			setSessionAttr("UserInfo", r);
+			setCode(1, r);
+		} else {
+			renderText("登录失败");
+		}
 	}
 }

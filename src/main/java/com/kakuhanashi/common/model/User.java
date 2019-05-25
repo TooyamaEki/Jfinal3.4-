@@ -1,5 +1,7 @@
 package com.kakuhanashi.common.model;
 
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.kakuhanashi.common.model.base.BaseUser;
 
 /**
@@ -7,5 +9,8 @@ import com.kakuhanashi.common.model.base.BaseUser;
  */
 @SuppressWarnings("serial")
 public class User extends BaseUser<User> {
-	
+	public Record get(String account) {
+		String sql = "SELECT * FROM user WHERE account = ? LIMIT 1";
+		return Db.findFirst(sql, account);
+	}
 }
