@@ -1,5 +1,7 @@
 package com.kakuhanashi.controller;
 
-public class WorksController {
+import com.jfinal.Controller;
 
+public class WorksController extends com.jfinal.Controller{
+	
 }
