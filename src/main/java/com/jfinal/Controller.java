@@ -18,6 +18,7 @@ public class Controller extends com.jfinal.core.Controller {
 		result.set("code",code );
 		result.set("msg",CodeMsgService.me.seCode(code) );
 		result.set("obj", obj);
+		
 		renderJson(result);
 	}
 }

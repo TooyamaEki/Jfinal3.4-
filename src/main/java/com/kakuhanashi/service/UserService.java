@@ -1,9 +1,11 @@
 package com.kakuhanashi.service;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
 import com.kakuhanashi.common.model.User;
 import com.kakuhanashi.tools.DateUtil;
+import com.kakuhanashi.vaildator.user.LoginVaildator;
 
 public class UserService {
 	public static final UserService me = new UserService();
@@ -29,6 +31,7 @@ public class UserService {
 	 * @param account
 	 * @return
 	 */
+	
 	public Record get(String account) {
 		Record r = dao.get(account);
 		return r;
