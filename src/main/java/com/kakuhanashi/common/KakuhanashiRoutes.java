@@ -2,7 +2,7 @@ package com.kakuhanashi.common;
 
 import com.jfinal.config.Routes;
 import com.kakuhanashi.controller.UserController;
-import com.kakuhanashi.controller.WorksController;
+import com.kakuhanashi.controller.WordsController;
 
 public class KakuhanashiRoutes extends Routes {
 
@@ -10,7 +10,7 @@ public class KakuhanashiRoutes extends Routes {
 	public void config() {
 		// TODO Auto-generated method stub
 		add("user", UserController.class);
-		add("works", WorksController.class);
+		add("words", WordsController.class);
 	}
 
 }
