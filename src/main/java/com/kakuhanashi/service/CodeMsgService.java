@@ -8,8 +8,10 @@ import com.kakuhanashi.common.model.CodeMsg;
 public class CodeMsgService {
 	public final static CodeMsgService me = new CodeMsgService();
 	CodeMsg dao = new CodeMsg().dao();
+
 	/**
-	 * 获取code信息 2019年5月24日14:49:34 
+	 * 获取code信息 2019年5月24日14:49:34
+	 * 
 	 * @param code
 	 * @return
 	 */
@@ -21,5 +23,30 @@ public class CodeMsgService {
 	public String seCode(int code) {
 		Record r = getByCode(code);
 		return r.getStr("msg");
+	}
+
+	/**
+	 * 获得校验规则
+	 */
+	public String getRegex(int code) {
+		Record r = getByCode(code);
+		return r.getStr("regex_value");
+
+	}
+
+	/**
+	 * 获得校验信息
+	 * 
+	 * @param code
+	 * @return
+	 */
+	public String getMsg(int code) {
+		Record r = getByCode(code);
+		return r.getStr("msg");
+	}
+
+	public String getFieId(int code) {
+		Record r = getByCode(code);
+		return r.getStr("field");
 	}
 }
