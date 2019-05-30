@@ -6,6 +6,7 @@ import com.kakuhanashi.common.model.User;
 import com.kakuhanashi.service.RandomUserService;
 import com.kakuhanashi.service.UserService;
 import com.kakuhanashi.vaildator.user.LoginVaildator;
+import com.kakuhanashi.vaildator.user.RegVaildator;
 
 public class UserController extends com.jfinal.Controller {
 	/**
@@ -17,7 +18,7 @@ public class UserController extends com.jfinal.Controller {
 		setCode(1, r);
 
 	}
-
+	@Before({RegVaildator.class})
 	public void reg() {
 		boolean b = UserService.me.add(getModel(User.class, "m"));
 		if (b) {
