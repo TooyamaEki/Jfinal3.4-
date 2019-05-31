@@ -18,9 +18,11 @@ public class UserService {
 	 * @return
 	 */
 	public boolean add(User m) {
-		m.removeNullValueAttrs();
+	
 		m.keep("account", "psw", "name");
 		m.set("create_time", DateUtil.getNowTime());
+		m.removeNullValueAttrs();
+		System.err.println(m);
 		return m.save();
 
 	}
