@@ -2,6 +2,7 @@ package com.kakuhanashi.vaildator.user;
 
 import com.jfinal.ValidatorExt;
 import com.jfinal.core.Controller;
+import com.kakuhanashi.service.UserService;
 import com.sun.org.apache.regexp.internal.recompile;
 
 public class RegVaildator extends ValidatorExt{
@@ -9,9 +10,9 @@ public class RegVaildator extends ValidatorExt{
 	@Override
 	protected void validate (Controller c) {
 		// TODO Auto-generated method stub
-		String ExtAccount =  "[0-9]*$";
-		validateRegex("m.account", ExtAccount, "error", "请输入手机号码");
-		addError("obj", "失踪出现");
+		setShortCircuit(true);
+		validateRegex(200003,200004,200005);
+		validateTrue(!UserService.me.exist(c.getPara("m.account")),200006);
 	}
 
 	@Override

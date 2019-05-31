@@ -6,6 +6,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.kakuhanashi.common.model.User;
 import com.kakuhanashi.tools.DateUtil;
 import com.kakuhanashi.vaildator.user.LoginVaildator;
+import com.sun.jndi.dns.ResourceRecord;
 
 public class UserService {
 	public static final UserService me = new UserService();
@@ -18,7 +19,6 @@ public class UserService {
 	 * @return
 	 */
 	public boolean add(User m) {
-	
 		m.keep("account", "psw", "name");
 		m.set("create_time", DateUtil.getNowTime());
 		m.removeNullValueAttrs();
@@ -33,13 +33,19 @@ public class UserService {
 	 * @param account
 	 * @return
 	 */
-	
+
 	public Record get(String account) {
 		Record r = dao.get(account);
 		return r;
 	}
 
-	
+	/**
+	 * 用户登录
+	 * 
+	 * @param account
+	 * @param psw
+	 * @return
+	 */
 	public Record login(String account, String psw) {
 		Record r = get(account);
 		if (r != null && r.getStr("psw").equals(psw)) {
@@ -49,4 +55,13 @@ public class UserService {
 		return null;
 	}
 
+	/**
+	 * 判断账号是否存在
+	 * 
+	 * @param account
+	 * @return
+	 */
+	public boolean exist(String account) {
+		return get(account) != null;
+	}
 }
