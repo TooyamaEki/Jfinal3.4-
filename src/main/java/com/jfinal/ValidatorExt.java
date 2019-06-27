@@ -19,7 +19,6 @@ public abstract class ValidatorExt extends Validator {
 	 * @param errCode
 	 */
 	protected void validateRegex(int... errCode) {
-		System.out.println("传进来检验的码数");
 		for (int code : errCode) {
 			validateRegex(CodeMsgService.me.getFieId(code), CodeMsgService.me.getRegex(code), true,CodeMsgService.me.getMsg(code), code);
 		}

@@ -72,4 +72,13 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return get("create_time");
 	}
 
+	public M setImg(java.lang.String img) {
+		set("img", img);
+		return (M)this;
+	}
+	
+	public java.lang.String getImg() {
+		return getStr("img");
+	}
+
 }
